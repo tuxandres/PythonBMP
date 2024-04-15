@@ -1,5 +1,6 @@
 import sys
 import os
+
 os.system ("cls")
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -113,10 +114,28 @@ nBytes = (((sizeWidth - (sizeWidth % 32))/8/4)+n)*4
 print ("sizeWidth " + str(sizeWidth))
 print ("LenData " + str(len(data)))
 print ("nBytes " + str(nBytes))
-
+ym=0
+nX = int(getValueDec(data, Width,True))
+nY = int(getValueDec(data, Height,True))
+a = [[0] * nX] * nY
 for y in reversed(range(startDataOffset, len(data), int(nBytes))):
-    #print (" :::: " + str(y))
-    print(getLineRaster(data,y,sizeWidth).replace("0", "  ").replace("1","**"))
+    #print (" ::::Y " + str(y) + " === ym" + str(ym))
+    #print(getLineRaster(data,y,sizeWidth).replace("0", "  ").replace("1","**"))
+    
 
+    for n in range(0,nX):
+        
+        a[ym][n]= getLineRaster(data,y,sizeWidth).replace("0", "-").replace("1","*")[n:n+1]
+        print( "(" + str(ym) + "-" +str(n) + ")=" + str(a[ym][n])+ " ",end="")
+        #print (str(a[ym][n]),end="")
+        
+    print("")
+    #print (">>(" + str(0) + "-" +str(2) + ")="+ str(a[0][2]) + " ", end="")
+    ym=ym+1
+print(" ")
+for m in range(0,1):  
+    for n in range(0,16):
+        print ("(" + str(m) + "-" +str(n) + ")="+ str(a[m][n]) + " ", end="")
+    print("")
 
 
